@@ -1,0 +1,11 @@
+# Abaikan folder virtual environment
+.venv/
+venv/
+env/
+ENV/
+bin/
+lib/
+
+# Abaikan file python lainnya
+__pycache__/
+*.pyc
