@@ -1,0 +1,281 @@
+.sidebar-container {
+    width: 330px;
+    height: 100vh;
+    background-color: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.sidebar-container.collapsed {
+    width: 90px;
+}
+
+/* Toggle Collapse Button */
+.collapse-btn {
+    position: absolute;
+    right: -15px;
+    top: 50px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* BRAND LOGO SECTION */
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+    padding-left: 10px;
+}
+
+.brand-icon-box {
+    min-width: 45px;
+}
+
+.brand-text h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.brand-text p {
+    font-size: 0.7rem;
+    color: #3b82f6;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* MENU SECTION */
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.menu-name {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.menu-icon {
+    min-width: 35px;
+}
+
+.menu-item:hover {
+    color: #64748b;
+    background: #f1f5f9;
+}
+
+/* Menu Aktif (Biru Astra) */
+.menu-item.active {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+    box-shadow: 0 10px 15px rgba(37, 99, 235, 0.2);
+}
+
+.active-arrow {
+    margin-left: auto;
+}
+
+/* FOOTER SECTION (Profile & Logout) */
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-profile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.avatar-box {
+    width: 40px;
+    height: 45px;
+    border-radius: 14px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info h4 {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.user-info p {
+    font-size: 0.7rem;
+    margin: 0;
+    color: #94a3b8;
+}
+
+/* Sign Out Button */
+.signout-btn {
+    background: white;
+    border: 1px solid #f1f5f9;
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #f43f5e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.signout-btn:hover {
+    background: #fff1f2;
+}
+
+/* Sidebar.css */
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Menjaga teks dan tombol toggle terpisah */
+    margin-bottom: 50px;
+    position: relative;
+    padding-right: 10px;
+}
+
+.brand-logo-wrapper {
+    display: flex;
+    align-items: center; /* Menjajakan ikon & teks secara vertikal di tengah */
+    gap: 15px; /* Jarak antara logo perisai dan teks SOPGUARD */
+}
+
+.brand-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Memberi sedikit border putih halus jika perisai ingin terlihat tebal */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1; /* Menghilangkan spasi antar baris teks */
+}
+
+.brand-main {
+    font-size: 24px;
+    font-weight: 900;
+    font-style: italic;
+    color: #1e293b;
+    margin: 0;
+    letter-spacing: -0.5px;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.brand-sub {
+    font-size: 11px;
+    color: #3b82f6;
+    font-weight: 800;
+    letter-spacing: 2.5px; /* Memberikan efek lebar pada AI ANALYTICS */
+    margin: 3px 0 0 0;
+    text-transform: uppercase;
+}
+
+/* TOMBOL TOGGLE BULAT BIRU SESUAI GAMBAR */
+.collapse-btn-toggle {
+    background: #3b82f6;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.collapse-btn-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* SAAT COLLAPSED (Menciut) */
+.sidebar-container.collapsed {
+    width: 85px;
+    padding: 30px 10px; /* Sedikit dikecilkan agar ikon center */
+}
+
+.sidebar-container.collapsed .brand-logo-wrapper {
+    justify-content: center;
+    width: 100%;
+}
+
+.sidebar-container.collapsed .collapse-btn-toggle {
+    position: absolute;
+    right: -19px; /* Tombol melayang di tengah garis pinggir */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Ketika Sidebar mengecil */
+.sidebar-container.collapsed {
+    width: 80px; /* Lebar dipersempit */
+    padding: 30px 0; /* Hapus padding samping agar konten bisa ke tengah */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Posisikan semua konten ke tengah secara horizontal */
+}
+
+/* Pastikan logo wrapper tidak mengambil ruang saat kosong */
+.sidebar-container.collapsed .brand-logo-wrapper {
+    display: none; /* Sembunyikan container logo sepenuhnya saat tertutup */
+}
+
+/* Posisikan tombol menu agar center di sidebar saat tertutup */
+.sidebar-container.collapsed .collapse-btn-toggle {
+    margin: 0 auto; 
+    position: static; /* Hilangkan posisi absolute agar dia ikut flow flexbox ke tengah */
+}
+
+/* Untuk menu item di bawahnya juga biar center */
+.sidebar-container.collapsed .menu-item {
+    justify-content: center;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+}

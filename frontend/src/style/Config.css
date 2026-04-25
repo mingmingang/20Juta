@@ -1,0 +1,61 @@
+.config-container {
+    animation: fadeIn 0.8s ease-out;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+/* IKON GEAR UTAMA */
+.main-settings-icon {
+    background-color: #f0f7ff;
+    width: 90px;
+    height: 90px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 28px;
+    border: 1px solid #e0f2fe;
+}
+
+/* TYPOGRAPHY */
+.fw-black { font-weight: 900 !important; }
+
+.tracking-tight { letter-spacing: -1.5px; font-size: 42px; }
+
+.tracking-widest { letter-spacing: 0.15rem; font-size: 11px; }
+
+/* KARTU KONFIGURASI */
+.config-card {
+    background: white;
+    border-radius: 50px; /* Sangat bulat sesuai gambar */
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.config-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px -15px rgba(0,0,0,0.06);
+    border-color: #3b82f633;
+}
+
+.config-icon-box {
+    color: #94a3b8;
+    background-color: #f8fafc;
+    width: 65px;
+    height: 65px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.config-card:hover .config-icon-box {
+    background-color: #2563eb;
+    color: white;
+}
+
+.clickable:active {
+    transform: scale(0.96);
+}

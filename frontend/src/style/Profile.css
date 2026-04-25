@@ -1,0 +1,86 @@
+.profile-header-banner {
+    background-color: #2563eb; /* Warna dasar biru */
+    
+    /* CORAK BATIK MENGGUNAKAN SVG PATTERN */
+    /* Pattern ini bertema 'Kawung' yang minimalis dan teknis */
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0C17.909 0 0 17.909 0 40s17.909 40 40 40 40-17.909 40-40S62.091 0 40 0zm0 76C20.118 76 4 59.882 4 40S20.118 4 40 4s36 16.118 36 36-16.118 36-36 36zm0-70C21.223 6 6 21.223 6 40s15.223 34 34 34 34-15.223 34-34S58.777 6 40 6z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+    
+    height: 180px;
+    border-radius: 40px 40px 0 0;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.avatar-wrapper {
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 35px;
+    border: 8px solid white;
+    margin-top: -120px; /* Membuat avatar overlapping ke atas */
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+.user-fullname {
+    font-size: 42px;
+    margin: 0;
+}
+
+.info-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.info-value {
+    color: #475569;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn-edit-profil {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 35px;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.stat-mini-card {
+    background-color: #f8fafc;
+}
+
+.mini-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #94a3b8;
+}
+
+.mini-value {
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.italic { font-style: italic; }

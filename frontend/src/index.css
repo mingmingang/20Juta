@@ -1,0 +1,58 @@
+/* Mengambil font Barlow dengan berat 400, 600, 700, 900 + Italic */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,700;1,900&display=swap');
+
+:root {
+  --bs-font-sans-serif: 'Barlow', sans-serif;
+}
+
+* {
+  font-family: 'Barlow', sans-serif !important;
+}
+
+body {
+  margin: 0;
+  background-color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Penyesuaian khusus untuk teks Extra Bold agar persis seperti di gambar */
+.fw-black {
+  font-weight: 900 !important;
+}
+
+.tracking-tighter {
+  letter-spacing: -0.5px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cursor-pointer:active {
+  transform: scale(0.96);
+}

@@ -1,0 +1,86 @@
+.sop-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.sop-main-title {
+    color: #1e293b;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+}
+
+.info-item {
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+/* BUTTON DOWNLOAD */
+.btn-download-report {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+.btn-download-report:hover { transform: scale(1.03); background-color: #2563eb; }
+
+/* GROUP STYLING */
+.group-title-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.number-badge {
+    background-color: #2563eb;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.group-name {
+    font-weight: 900;
+    margin: 0;
+    color: #0f172a;
+    font-size: 16px;
+}
+
+/* STATUS CARDS STYLING */
+.status-card {
+    transition: transform 0.3s;
+    background-color: white;
+    border: 1px solid #f1f5f9 !important;
+}
+.status-card:hover { transform: translateY(-5px); }
+
+.item-title { font-size: 15px; margin: 0; max-width: 80%; line-height: 1.4; color: #1e293b;}
+.item-subtitle { font-size: 11px; font-weight: 700; color: #94a3b8; }
+.badge-time { font-size: 10px; color: #94a3b8; border: 1px solid #e2e8f0; padding: 2px 8px; border-radius: 6px; font-weight: 700; }
+
+.status-label { font-size: 11px; font-weight: 800; }
+
+/* MODIFIERS BY STATUS */
+/* VERIFIED (Hijau) */
+.status-card.verified { background-color: #f0fdf4; border: 1px solid #dcfce7 !important; }
+.status-card.verified .item-title, .status-card.verified .status-label { color: #15803d; }
+
+/* PROGRESS (Biru) */
+.status-card.progressing { background-color: #eff6ff; border: 1px solid #dbeafe !important; }
+.status-card.progressing .item-title, .status-card.progressing .status-label { color: #1d4ed8; }
+
+/* WAIT (Abu-abu) */
+.status-card.waiting { background-color: white; }
+.status-card.waiting .item-title { color: #1e293b; }
+.status-card.waiting .status-label { color: #cbd5e1; }
