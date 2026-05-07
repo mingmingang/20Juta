@@ -14,6 +14,7 @@ from tkinter import ttk, messagebox, colorchooser
 from PIL import Image, ImageTk
 from datetime import datetime
 
+
 # ============================================================
 # CONFIGURATION  —  Ubah nilai di bawah ini sesuai kebutuhan
 # ============================================================

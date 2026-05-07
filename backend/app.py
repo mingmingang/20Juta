@@ -7,6 +7,9 @@ import sys
 from flask import Flask, Response, request, jsonify 
 from flask_cors import CORS
 import pyodbc
+import qrcode
+import base64
+from io import BytesIO
 
 # ==================== SQL Server Setup ====================
 DB_CONFIG = (
@@ -34,14 +37,50 @@ COLORS = [
 TARGET_OBJECTS = []  
 
 app = Flask(__name__)
-CORS(app) # Supaya React bisa akses
+CORS(app) 
 
-# Global variable untuk menyimpan hasil deteksi (MediaPipe Async)
 latest_detection_result = None
 
-# ============================================================
-# FUNGSI-FUNGSI ORIGINAL KAMU
-# ============================================================
+# Tambahkan folder export di atas
+EXPORT_DIR = r"A:\ASTRAtech\Lomba\T-MIND\SOPGuardAI\Export_Generator"
+if not os.path.exists(EXPORT_DIR):
+    os.makedirs(EXPORT_DIR)
+
+# FUNGSI UNTUK GENERATE FISIK PNG ARUCO
+def generate_and_save_aruco(marker_id, full_name):
+    try:
+        # Menggunakan DICT_4X4_50 sesuai kriteria lomba kamu
+        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        marker_img = cv2.aruco.generateImageMarker(aruco_dict, marker_id, 500) # Ukuran 500px
+        
+        # Buat nama file: ArUco_ID0_SAHAR_ROMANSA.png
+        clean_name = full_name.replace(" ", "_").upper()
+        filename = f"ArUco_ID{marker_id}_{clean_name}.png"
+        filepath = os.path.join(EXPORT_DIR, filename)
+        
+        cv2.imwrite(filepath, marker_img)
+        print(f"[INFO] ArUco Ter-generate: {filepath}")
+        return True
+    except Exception as e:
+        print(f"[ERROR] Gagal generate ArUco: {e}")
+        return False
+
+def image_to_base64(img_pil):
+    buffered = BytesIO()
+    img_pil.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+def save_aruco_marker(marker_id, name):
+    try:
+        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        marker_img = cv2.aruco.generateImageMarker(aruco_dict, marker_id, 500)
+        filename = f"ArUco_ID{marker_id}_{name.replace(' ', '_')}.png"
+        filepath = os.path.join(EXPORT_DIR, filename)
+        cv2.imwrite(filepath, marker_img)
+        return filename
+    except Exception as e:
+        print(f"Error Gen ArUco: {e}")
+        return None
 
 def download_model():
     if os.path.exists(MODEL_PATH): return True
@@ -242,40 +281,55 @@ def get_users():
     try:
         conn = pyodbc.connect(DB_CONFIG)
         cursor = conn.cursor()
-        cursor.execute("SELECT id, fullName, employeeId, division, accessLevel, securityStatus, username FROM Users")
+        cursor.execute("SELECT id, fullName, employeeId, division, accessLevel, securityStatus, username, arucoId FROM Users")
         rows = cursor.fetchall()
         
         users = []
         for r in rows:
             users.append({
                 "id": r[0], "fullName": r[1], "employeeId": r[2],
-                "division": r[3], "accessLevel": r[4], "status": r[5], "username": r[6]
+                "division": r[3], "accessLevel": r[4], "status": r[5], "username": r[6], "arucoId": r[7]
             })
         conn.close()
         return jsonify(users)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Route untuk menambah user baru
+
 @app.route('/api/users', methods=['POST'])
 def add_user():
     data = request.json
     try:
         conn = pyodbc.connect(DB_CONFIG)
         cursor = conn.cursor()
+
+        cursor.execute("SELECT MAX(arucoId) FROM Users")
+        max_id_row = cursor.fetchone()
+        new_aruco_id = 0 if max_id_row[0] is None else max_id_row[0] + 1
+
         query = """
-            INSERT INTO Users (username, password, fullName, employeeId, division, accessLevel, securityStatus)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO Users (username, password, fullName, employeeId, division, accessLevel, securityStatus, arucoId)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """
         cursor.execute(query, (
             data['username'], data['password'], data['fullName'], 
-            data['employeeId'], data['division'], data['accessLevel'], 'OFFLINE'
+            data['employeeId'], data['division'], data['accessLevel'], 'OFFLINE', new_aruco_id
         ))
+        
+        generate_and_save_aruco(new_aruco_id, data['fullName'])
+
         conn.commit()
         conn.close()
-        return jsonify({"success": True})
+        
+        return jsonify({
+            "success": True, 
+            "message": "User & ArUco Marker berhasil dibuat!",
+            "arucoId": new_aruco_id
+        })
     except Exception as e:
+        print(f"Error add user: {e}")
         return jsonify({"success": False, "error": str(e)}), 500
+        
 
 @app.route('/api/users/update', methods=['POST'])
 def update_user_management():
@@ -297,6 +351,54 @@ def update_user_management():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/generate-qr', methods=['POST'])
+def api_generate_qr():
+    data = request.json
+    qr_data = data.get('data', 'T-MIND Default')
+    filename = data.get('filename', f"QR_{int(time.time())}")
+
+    qr = qrcode.QRCode(version=1, box_size=10, border=4)
+    qr.add_data(qr_data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white").convert('RGB')
+
+    # Simpan ke folder
+    filepath = os.path.join(EXPORT_DIR, f"{filename}.png")
+    img.save(filepath)
+
+    return jsonify({
+        "success": True,
+        "image": image_to_base64(img), # Kirim datanya supaya tampil di React
+        "path": filepath
+    })
+
+# ==================== API GENERATE ARUCO ====================
+@app.route('/api/generate-aruco', methods=['POST'])
+def api_generate_aruco():
+    data = request.json
+    marker_id = int(data.get('id', 0))
+    dict_type = data.get('dict', "4x4_50")
+    size = int(data.get('size', 500))
+    filename = data.get('filename', f"ArUco_ID{marker_id}")
+
+    # Logic OpenCV ArUco
+    aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+    marker_img = cv2.aruco.generateImageMarker(aruco_dict, marker_id, size)
+    
+    # Simpan ke folder
+    filepath = os.path.join(EXPORT_DIR, f"{filename}.png")
+    cv2.imwrite(filepath, marker_img)
+
+    # Convert ke PIL untuk di-encode ke Base64
+    from PIL import Image
+    img_pil = Image.fromarray(marker_img).convert("RGB")
+
+    return jsonify({
+        "success": True,
+        "image": image_to_base64(img_pil),
+        "path": filepath
+    })
     
 if __name__ == '__main__':
     # Ganti port dari 5000 ke 5001

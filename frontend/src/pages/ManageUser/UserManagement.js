@@ -10,6 +10,7 @@ import {
   Save,
   Eye,
   Edit3,
+  Target,
   Trash2,
 } from "lucide-react";
 import "../../style/UserManagement.css";
@@ -173,6 +174,15 @@ const UserManagement = ({ onBack, notify }) => {
                       {user.accessLevel?.toUpperCase()}
                     </span>
                   </td>
+
+                  <td className="text-center">
+                    <div className="bg-light rounded-3 py-1 px-2 border shadow-sm" style={{ minWidth: '70px' }}>
+                      <span className="fw-black small text-primary" style={{ fontSize: '12px' }}>
+                        {user.arucoId !== null && user.arucoId !== undefined ? `#ID-${user.arucoId}` : 'N/A'}
+                      </span>
+                    </div>
+                  </td>
+
                   <td>
                     <div className="d-flex align-items-center gap-2">
                       <div
@@ -344,6 +354,16 @@ const UserManagement = ({ onBack, notify }) => {
                 <div className="col-6 mb-3">
                   <label className="mini-label">AKSES</label>
                   <p className="fw-bold">{selectedUser.accessLevel}</p>
+                </div>
+                <div className="mt-4 p-3 bg-light rounded-4 d-flex align-items-center gap-3 border">
+                  <div className="bg-white p-2 rounded-3 shadow-sm">
+                    <Target size={40} className="text-primary" />
+                  </div>
+                  <div className="text-start">
+                    <small className="mini-label">SISTEM IDENTIFIKASI</small>
+                    <p className="m-0 fw-black">ARUCO MARKER #{selectedUser.arucoId}</p>
+                    <small className="text-muted">ID unik untuk Tracking AI Camera</small>
+                  </div>
                 </div>
                 <div className="col-12">
                   <label className="mini-label">STATUS</label>
