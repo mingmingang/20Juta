@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 # model YOLOv11
-model = YOLO("C:/Users/Victus/Downloads/best (20).pt")
+model = YOLO("A:/ASTRAtech/Lomba/T-MIND/SOPGuardAI/20Juta/Trial OCR/best (22).pt")
 
 # Inisialisasi kamera
 # Ganti IP_ADDRESS dan PORT sesuai dengan yang ada di aplikasi IP Camera Lite di HP Anda.

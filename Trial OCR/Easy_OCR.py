@@ -115,7 +115,7 @@ if __name__ == "__main__":
     MODE_PENGUJIAN = "ENGINE"
     
     # Path gambar (silakan disesuaikan)
-    TEST_IMAGE_PATH = r"C:\KULIAH\SEMESTER 6\T-MIND\05 Project TMMIN\Trial OCR\ocr3.jpg" 
+    TEST_IMAGE_PATH = r"A:\ASTRAtech\Lomba\T-MIND\SOPGuardAI\20Juta\Trial OCR\ocr3.jpg" 
     
     try:
         read_numbers_with_ocr(TEST_IMAGE_PATH, mode=MODE_PENGUJIAN)
