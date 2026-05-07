@@ -1,6 +1,8 @@
 # --- Python (Virtual Environments) ---
 .venv/
 venv/
+.venv_ocr/
+venv_ocr/
 env/
 ENV/
 bin/
